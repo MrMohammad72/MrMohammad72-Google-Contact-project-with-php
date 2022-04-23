@@ -1,0 +1,38 @@
+body {
+    height: 100%;
+    background-image:url(../img/backgrounds-blank-blue-953214.jpg);
+    margin-top: 0;
+  
+}
+label,
+button {
+    margin-right: 15px;
+}
+
+.btn-warning {
+    color: #212529;
+    background-color: #c0c1c6;
+    border-color: #d0cec5;
+    border-radius: 19px;
+}
+
+input[type="password"] {
+    text-align: center;
+    line-height: 30px;
+    padding: 0 30px;
+    border-radius: 25px;
+    border: 1px solid #7cb0b9;
+}
+
+input[type="text"],
+button {
+
+    text-align: center;
+    line-height: 30px;
+    padding: 0 30px;
+    border-radius: 25px;
+    border: 1px px solid #7cb0b9;
+}
+.alert {
+    display: none;
+}
