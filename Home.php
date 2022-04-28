@@ -34,8 +34,8 @@ include 'lang/fa/user.php';
         <a href="<?php echo DB_HOME; ?>"><?php echo HOME; ?></a>
         <a href="<?php echo DB_USER_EDIT.'?id'.'='.$id; ?>"> <?php echo EDIT; ?></a>
         <a href="<?php echo DB_USER_DISPLAY_CONTACTS; ?>"><?php echo DISPLAY_CONTACT; ?></a>
-        <a href="<?php echo DB_PHONE_BOOK; ?>"><?php echo IMPORT; ?></a>
-        <a href="#clients"><?php echo PRINT1 ; ?></a>
+        <a href="<?php echo DB_IMPORT_USER; ?>"><?php echo IMPORT; ?></a>
+        <a href="<?php echo DB_USER_EXPORTER; ?>"><?php echo PRINT1 ; ?></a>
         <a href="<?php echo DB_USER_TRASH; ?>"><?php echo TRASH; ?></a>
         <a href="<?php echo DB_USER_LOGOUT . '?logout=1'; ?>"> <?php echo LOGOUT; ?></a>
         <?php endif; ?>

@@ -4,10 +4,11 @@ define('DB_HOME', 'http://localhost/Google_contact/Home.php');
 define('DB_USER_REGISTER', 'http://localhost/Google_contact/Register.php');
 define('DB_USER_LIST', 'http://localhost/Google_contact/List.php');
 define('DB_USER_EDIT', 'http://localhost/Google_contact/EditForm.php');
-define('DB_PHONE_BOOK', 'http://localhost/Google_contact/Contacts.php');
+define('DB_IMPORT_USER', 'http://localhost/Google_contact/ImportContacts.php');
 define('DB_USER_LOGIN', 'http://localhost/Google_contact/Login.php');
 define('DB_USER_TRASH', 'http://localhost/Google_contact/TrashContacts.php');
 define('DB_USER_DISPLAY_CONTACTS', 'http://localhost/Google_contact/Contacts.php');
+define('DB_USER_EXPORTER', 'http://localhost/Google_contact/Exporter.php');
 define('DB_USER_LOGOUT', 'http://localhost/Google_contact/inc/actions.php');
 
 define('PHONE_BOOK', ' دفترچه تلفن');
