@@ -1,21 +1,22 @@
 <?php
 session_start();
 
+function connection_db($localhost, $user, $password, $project)
+{
+    $db = new mysqli($localhost, $user, $password, $project);
+
+    $db->query("SET NAMES UTF8;");
+    return $db;
+}
+
 if (isset($_GET['action'])) {
     sleep(1);
     function getCity($citys)
     {
-        /*   $_SESSION['selectID'];  create session of part EditForm.php */
 
         $titleCity = $_SESSION['selectID'];
-
-
-
-
         $str = '<option value="" class="select-selected">' . nl2br('شهر') . '</option>';
         foreach ($citys as $city) {
-
-
             $str .= '<option value=" ' . $city['id'] . ' " >' . nl2br($city['title']) . '</option>';
         }
         echo $str;
@@ -25,10 +26,8 @@ if (isset($_GET['action'])) {
     $action = $_GET['action'];
     if ($action == 'sc') {
 
-
         $qmArr = $_POST['qmStr'];
-        $db = new mysqli('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
-        // define our tables for usage in code
+        $db = connection_db('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
         $db->userTable = "users";
         $db->statesTable = "states";
         $db->cityTable = "city";
@@ -39,15 +38,10 @@ if (isset($_GET['action'])) {
     }
     function getSelectCity($citys)
     {
-        /*   $_SESSION['selectID'];  create session of part EditForm.php */
 
         $titleCity = $_SESSION['selectID'];
-
-
-
         $str = '<option value="" class="select-selected">' . nl2br('شهر') . '</option>';
         foreach ($citys as $city) {
-
             $str .= '<option class="' . $_SESSION['selectID'] . '=' . $city['title'] . '"';
             if ($_SESSION['selectID'] === $city['id']) {
                 $str .= " selected";
@@ -55,16 +49,12 @@ if (isset($_GET['action'])) {
             $str .= " value=" . $city['id'] . ">" . nl2br($city['title']) . "</option>";
         }
         echo $str;
-        //unset($_SESSION['select_state']);
-
     }
     $action = $_GET['action'];
     if ($action == 'eu') {
 
-
         $qmArr = $_POST['qmStr'];
-        $db = new mysqli('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
-        // define our tables for usage in code
+        $db = connection_db('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
         $db->userTable = "users";
         $db->statesTable = "states";
         $db->cityTable = "city";
@@ -74,28 +64,19 @@ if (isset($_GET['action'])) {
         getSelectCity($citys);
     }
 
-    /* function getUser($users)
-    {} */
-
     $action = $_GET['action'];
     if ($action == 'su') {
 
-
-
-
-        $db = new mysqli('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
-        // define our tables for usage in code
+        $db = connection_db('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
         $db->userTable = "contacts";
         $search = $_POST['suStr'];
         $id = $_SESSION['id'];
-
 
         $sql = "SELECT * FROM $db->userTable where user_id='$id' and name like '$search' and and trash='0'";
         $result = $db->query($sql);
         $contacts = $result->fetch_all(1);
 
         if ($contacts) {
-
 
             foreach ($contacts as $contact) {
 
@@ -106,14 +87,10 @@ if (isset($_GET['action'])) {
                 $str .= '<td>' . nl2br($contact['name']) .  '</td>' . '</tr>';
             }
             echo $str;
-            //die();
-
-
         } else {
 
             $errorMsg = 'موردی یافت نشد.';
             $str = "<div class='error'>" . nl2br($errorMsg) . "</div>";
-            /*  '<td colspan="6">' . nl2br($errorMsg) .  '</td>';*/
             echo $str;
         }
     }
@@ -126,71 +103,46 @@ if (isset($_GET['action'])) {
     $action = $_GET['action'];
     if ($action == 'ru') {
 
-        $db = new mysqli('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
-        // define our tables for usage in code
+        $db = connection_db('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
         $db->userTable = "contacts";
         $id = $_POST['id'];
-
         $sql = "UPDATE  $db->userTable  SET trash=1 where id='$id'";
-        //$sql = "DELETE FROM $db->userTable where id='$id'";
-
         $result = $db->query($sql);
-
         header("location:http://localhost/Google_contact/Contacts.php?removeUser=sucMsgRemove");
         exit();
     }
     $action = $_GET['action'];
     if ($action == 'rutr') {
 
-        $db = new mysqli('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
-        // define our tables for usage in code
+        $db = connection_db('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
         $db->userTable = "contacts";
         $id = $_POST['id'];
-
-        //$sql = "UPDATE  $db->userTable  SET trash=1 where id='$id'";
         $sql = "DELETE FROM $db->userTable where id='$id'";
-
         $result = $db->query($sql);
-
         $page = $_SERVER['HTTP_REFERER'];
         echo '<meta http-equiv="Refresh" content="0;' . $page . '">';
-
         exit();
     }
 
     $action = $_GET['action'];
     if ($action == 'resu') {
 
-        $db = new mysqli('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
-        // define our tables for usage in code
+        $db = connection_db('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
         $db->userTable = "contacts";
         $id = $_POST['suStr'];
-
         $sql = "UPDATE $db->userTable  SET trash='0' where id='$id'";
-        //$sql = "DELETE FROM $db->userTable where id='$id'";
-
         $result = $db->query($sql);
-        //var_dump($result);
-        //Header('Location: '.$_SERVER['PHP_SELF']);
-        // var_dump($_SERVER);
         $page = $_SERVER['HTTP_REFERER'];
         echo '<meta http-equiv="Refresh" content="0;' . $page . '">';
-        // header("location:http://localhost/Google_contact/TrashContacts.php"); 
         exit();
     }
 
-
-
     function titleState($state_id)
     {
-        $db = new mysqli('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
-        // define our tables for usage in code
+        $db = connection_db('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
         $db->stateTable = "states";
-
         $sql = "SELECT * FROM $db->stateTable where id='$state_id' ";
         $result = $db->query($sql);
-        $state = $result->fetch_all(1);
-        /* print_r($state);
-        die($state); */
+        return  $state = $result->fetch_all(1);
     }
 }
