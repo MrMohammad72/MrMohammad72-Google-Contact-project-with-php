@@ -9,15 +9,25 @@ if (ValidateWhithList($format) == true) {
    $db = connection_db('localhost', 'db_user', 'stez5TSvX959vhqz', 'project_php');
    
    $results = selectcontact($db);
-   $tempArray = [];
+  
    foreach ($results as $result) {
-      
-      array_push($tempArray, $result['name'], " ", $result['mobile'], " ", $result['email'], PHP_EOL);
+
+
+      $data .=  nl2br($result['name']) . PHP_EOL;
+      if ($result['mobile']) {
+         $data .= 'mobile'. ' ' .' '.nl2br($result['mobile']). PHP_EOL;
+      }
+      if ($result['email']) {
+         $data .= 'email'.' '. ' '. nl2br($result['email']). PHP_EOL;
+      }
+   
+      $data .=  PHP_EOL;
+
    }
    
    $filePath = "/var/www/html/Google_contact/inc/Files/";
    $nameFile = $filePath . 'Contacts-' . date('y-m-d h:m:i') . '.' . $format;
-   file_put_contents($nameFile, $tempArray);
+   file_put_contents($nameFile, $data);
    $_SESSION['sucessPrint'] = "sucessPrint";
    header("location: http://localhost/Google_contact/Exporter.php");
    exit;
